@@ -1,24 +1,29 @@
-# README
+# MeetScheduler
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Basic useful feature list:
 
-Things you may want to cover:
+ * User can Create an event or multiple events for meeting and invite other users
+ * User can see list of his upcoming meeting and past meetings
+ * User can see Details of individual meeting
+ * Send notification to user for scheduled meeting via email
 
-* Ruby version
 
-* System dependencies
+Models
+ * User
+ * Employee
+ * Admin
+ * Meeeting
+ * Venue
+ * M.O.M.
+ * Agenda
+ * Suggestion
 
-* Configuration
+### Associations between Models
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Employee **is a** User
+* Admin **is a** User
+* Meeting - users :  **Many to Many**  Association
+* Meeting - MOM  : **One to One** Association
+* MOM - Agenda : **One to Many** Association
+* Angenda - Suggestion : **One to Many** Association
+* User - Suggestion : **Many to Many** Association
