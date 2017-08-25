@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825184614) do
+ActiveRecord::Schema.define(version: 20170825194321) do
+
+  create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "mom_id"
+    t.string "name"
+    t.integer "allocated_time"
+    t.string "action"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mom_id"], name: "index_agendas_on_mom_id"
+  end
 
   create_table "meetings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.date "date"
@@ -31,6 +42,14 @@ ActiveRecord::Schema.define(version: 20170825184614) do
     t.bigint "meeting_id"
     t.index ["meeting_id"], name: "index_meetings_users_on_meeting_id"
     t.index ["user_id"], name: "index_meetings_users_on_user_id"
+  end
+
+  create_table "moms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.text "summary"
+    t.bigint "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_moms_on_meeting_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -60,8 +79,10 @@ ActiveRecord::Schema.define(version: 20170825184614) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "agendas", "moms"
   add_foreign_key "meetings", "users", column: "organiser_id"
   add_foreign_key "meetings", "venues"
   add_foreign_key "meetings_users", "meetings"
   add_foreign_key "meetings_users", "users"
+  add_foreign_key "moms", "meetings"
 end
