@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825174506) do
+ActiveRecord::Schema.define(version: 20170825175222) do
+
+  create_table "meetings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.date "date"
+    t.time "start_time"
+    t.string "status"
+    t.text "key_note"
+    t.float "duration", limit: 24
+    t.bigint "organiser_id"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organiser_id"], name: "index_meetings_on_organiser_id"
+    t.index ["venue_id"], name: "index_meetings_on_venue_id"
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "email", default: "", null: false
@@ -39,4 +53,6 @@ ActiveRecord::Schema.define(version: 20170825174506) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "meetings", "users", column: "organiser_id"
+  add_foreign_key "meetings", "venues"
 end
