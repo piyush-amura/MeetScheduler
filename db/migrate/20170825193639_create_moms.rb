@@ -1,7 +1,5 @@
-#
-# Class CreateMoms provides <description>
-#
-# @author Joe Blog <Joe.Blog@nowhere.com>
+# migration class
+# @author Piyush Wani <piyush.wani@amuratech.com>
 #
 class CreateMoms < ActiveRecord::Migration[5.1]
   def change

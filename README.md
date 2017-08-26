@@ -26,4 +26,4 @@ Models
 * Meeting - MOM  : **One to One** Association
 * MOM - Agenda : **One to Many** Association
 * Angenda - Suggestion : **One to Many** Association
-* User - Suggestion : **Many to Many** Association
+* User - Suggestion : **One to Many** Association
