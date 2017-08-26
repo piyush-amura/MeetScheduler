@@ -9,7 +9,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :meetings 
+  has_and_belongs_to_many :meetings
+  has_many :suggestions, -> { select(:suggestion) }
 
   def organised_meetings
     Meeting.where(organiser_id: id)

@@ -10,24 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825194321) do
+ActiveRecord::Schema.define(version: 20170826091830) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.bigint "mom_id"
-    t.string "name"
-    t.integer "allocated_time"
-    t.string "action"
-    t.string "status"
+    t.bigint "mom_id", null: false
+    t.string "name", null: false
+    t.integer "allocated_time", default: 30, null: false
+    t.string "action", null: false
+    t.string "status", default: "approval needed", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mom_id"], name: "index_agendas_on_mom_id"
   end
 
   create_table "meetings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.date "date"
-    t.time "start_time"
-    t.string "status"
-    t.text "key_note"
+    t.date "date", null: false
+    t.time "start_time", null: false
+    t.string "status", default: "on time"
+    t.text "key_note", null: false
     t.float "duration", limit: 24
     t.bigint "organiser_id"
     t.bigint "venue_id"
@@ -45,11 +45,22 @@ ActiveRecord::Schema.define(version: 20170825194321) do
   end
 
   create_table "moms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.text "summary"
+    t.text "summary", null: false
     t.bigint "meeting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["meeting_id"], name: "index_moms_on_meeting_id"
+  end
+
+  create_table "suggestions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "agenda_id", null: false
+    t.text "suggestion", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agenda_id"], name: "index_suggestions_on_agenda_id"
+    t.index ["user_id", "agenda_id"], name: "index_suggestions_on_user_id_and_agenda_id"
+    t.index ["user_id"], name: "index_suggestions_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -72,9 +83,9 @@ ActiveRecord::Schema.define(version: 20170825194321) do
   end
 
   create_table "venues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "name"
-    t.text "address"
-    t.integer "capacity"
+    t.string "name", null: false
+    t.text "address", null: false
+    t.integer "capacity", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -85,4 +96,6 @@ ActiveRecord::Schema.define(version: 20170825194321) do
   add_foreign_key "meetings_users", "meetings"
   add_foreign_key "meetings_users", "users"
   add_foreign_key "moms", "meetings"
+  add_foreign_key "suggestions", "agendas"
+  add_foreign_key "suggestions", "users"
 end

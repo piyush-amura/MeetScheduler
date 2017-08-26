@@ -5,4 +5,5 @@
 #
 class Agenda < ApplicationRecord
   belongs_to :mom
+  has_many :suggestions, -> { select(:suggestion) }
 end
