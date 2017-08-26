@@ -5,4 +5,8 @@
 class Suggestion < ApplicationRecord
   belongs_to :user
   belongs_to :agenda
+
+  validates :user_id, presence: true
+  validates :agenda_id, presence: true
+  validates :suggestion, presence: true
 end
