@@ -3,11 +3,23 @@
 #
 # @author Piyush Wani <piyush.wani@amuratech.com>
 class User < ApplicationRecord
+  EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
+  TYPES = %w[Employee Admin].freeze
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Validations for email using REGEX
+  validates :email, length: { maximum: 100 },
+                    format: EMAIL_REGEX
+
+  # Validations for type
+  validate :type_is_allowed
+
+  # Validations for name
+  validates :name, presence: true
+                  
   # many to many Association
   has_and_belongs_to_many :meetings
 
@@ -33,5 +45,11 @@ class User < ApplicationRecord
   # returns list of meetings objects
   def upcoming_meetings(d = Date.today)
     meetings.where(['date > ?', d])
+  end
+
+  # method for validation for type
+  # adds a error to error array
+  def type_is_allowed
+    errors.add(:type, 'restricted from use.') unless TYPES.include?(type)
   end
 end
