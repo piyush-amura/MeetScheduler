@@ -15,8 +15,9 @@ class User < ApplicationRecord
                     format: EMAIL_REGEX
 
   # Validations for type
-  validate :type_is_allowed
-
+  validates :type, presence: true,
+                   inclusion: { in: TYPES,
+                                message: '%<value>s restricted from use.' }
   # Validations for name
   validates :name, presence: true
                   
@@ -45,11 +46,5 @@ class User < ApplicationRecord
   # returns list of meetings objects
   def upcoming_meetings(d = Date.today)
     meetings.where(['date > ?', d])
-  end
-
-  # method for validation for type
-  # adds a error to error array
-  def type_is_allowed
-    errors.add(:type, 'restricted from use.') unless TYPES.include?(type)
   end
 end

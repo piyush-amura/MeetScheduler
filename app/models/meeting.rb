@@ -13,9 +13,16 @@ class Meeting < ApplicationRecord
   validates :duration, presence: true
   validates :organiser_id, presence: true
   validates :venue_id, presence: true
-  validate :status_validation
-  validate :date_validation
-  validate :duration_validation
+  validate  :date_validation
+
+  # validation for checking non negative value on capacity
+  validates :duration, numericality: { greater_than: 0 }
+
+  # Validations for checking status type
+  validates :status, presence: true,
+                     inclusion: { in: TYPES,
+                                  message: '%<value>s restricted from use.' }
+
   # getter method for oraniser of the meeting
   # returns object of User class
   def organiser
@@ -31,21 +38,9 @@ class Meeting < ApplicationRecord
   end
 
   # method for checking status type
-  # adds a error to error array
-  def status_validation
-    errors.add(:status, 'restricted from use.') unless TYPES.include?(status)
-  end
-
-  # method for checking status type
   # date should not be from past
   # adds a error to error array
   def date_validation
     errors.add(:date, ': cannot select past date.') if date < Date.today
-  end
-
-  # method for checking non negative value on capacity
-  # adds a error to error array
-  def duration_validation
-    errors.add(:duration, 'cannot be negative or zero') if duration <= 0
   end
 end

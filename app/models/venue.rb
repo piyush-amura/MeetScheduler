@@ -3,27 +3,21 @@
 # @author Piyush Wani <piyush.wani@amuratech.com>
 #
 class Venue < ApplicationRecord
-  TYPES = %w[available not_available].freeze
+  TYPES = %w[available not\ available].freeze
 
   has_many :meetings
 
   validates :name, presence: true
   validates :address, presence: true
 
-  # custom Validation for status
-  validate :status_validation, :capacity_validation
+  # Validation for status type check
+  validates :status, presence: true,
+                     inclusion: { in: TYPES,
+                                  message: '%<value>s restricted from use.' }
 
-  # method for checking status type
-  # adds a error to error array
-  def status_validation
-    errors.add(:status, 'restricted from use.') unless TYPES.include?(status)
-  end
-
-  # method for checking non negative value on capacity
-  # adds a error to error array
-  def capacity_validation
-    errors.add(:capacity, 'cannot be negative') if capacity <= 0
-  end
+  # validation for checking non negative value on capacity
+  validates :capacity, numericality: { greater_than: 0,
+                                       only_integer: true }
 
   # method for checking availability
   # of the venue

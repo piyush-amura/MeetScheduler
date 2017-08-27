@@ -9,18 +9,12 @@ class Agenda < ApplicationRecord
 
   validates :mom_id, presence: true
   validates :name, presence: true
-  validates :allocated_time, presence: true
+  # Validations for allocated_time value
+  validates :allocated_time, numericality: { greater_than: 0,
+                                             only_integer: true }
   validates :action, presence: true
-  validates :status, presence: true
-
-  validate :allocated_time_validation
-  validate :status_validation
-
-  def allocated_time_validation
-    errors.add(:allocated_time, 'cannot be negative') if allocated_time <= 0
-  end
-
-  def status_validation
-    errors.add(:status, 'restricted from use.') unless TYPES.include?(status)
-  end
+  # Validations for status
+  validates :status, presence: true,
+                     inclusion: { in: TYPES,
+                                  message: '%<value>s restricted from use.' }
 end
