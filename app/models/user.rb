@@ -8,8 +8,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  self.reconfirmable = false       
   # Validations for email using REGEX
   validates :email, length: { maximum: 100 },
                     format: EMAIL_REGEX
