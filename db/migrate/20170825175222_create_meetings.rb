@@ -10,7 +10,7 @@ class CreateMeetings < ActiveRecord::Migration[5.1]
       t.text 'key_note', null: false
       t.float 'duration', precision: 2
       t.references :organiser, index: true, foreign_key: { to_table: :users }
-      t.references :venue, index: true, foreign_key: true
+      t.references :venue, index: true
       t.timestamps
     end
   end

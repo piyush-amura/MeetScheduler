@@ -5,7 +5,7 @@
 class Agenda < ApplicationRecord
   TYPES = %w[approval\ needed approved not\ approved].freeze
   belongs_to :mom
-  has_many :suggestions, -> { select(:suggestion) }
+  has_many :suggestions, -> { select(:suggestion) }, dependent: :destroy
 
   validates :mom_id, presence: true
   validates :name, presence: true

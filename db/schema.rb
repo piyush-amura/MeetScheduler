@@ -93,10 +93,6 @@ ActiveRecord::Schema.define(version: 20170826113038) do
 
   add_foreign_key "agendas", "moms"
   add_foreign_key "meetings", "users", column: "organiser_id"
-  add_foreign_key "meetings", "venues"
-  add_foreign_key "meetings_users", "meetings"
-  add_foreign_key "meetings_users", "users"
   add_foreign_key "moms", "meetings"
   add_foreign_key "suggestions", "agendas"
-  add_foreign_key "suggestions", "users"
 end

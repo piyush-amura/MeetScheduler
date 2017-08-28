@@ -4,7 +4,7 @@
 #
 class Mom < ApplicationRecord
   belongs_to :meeting
-  has_many :agendas
+  has_many :agendas, dependent: :destroy
 
   validates :summary, presence: true
   validates :meeting_id, presence: true, uniqueness: {
