@@ -1,4 +1,12 @@
+# Class VenuesController provides CRUD functionality for venue
+#
+# @author Piyush Wani <piyush.wani@amuratech.com>
+#
 class VenuesController < ApplicationController
+
+  before_action only: %i[edit update] do
+    @venue = Venue.where(id: params[:id]).first
+  end
   def new; end
 
   def index
@@ -11,12 +19,10 @@ class VenuesController < ApplicationController
     render 'new'
   end
 
-  def edit
-    @venue = Venue.where(id: params[:id]).first
-  end
+  def edit; end
 
   def update
-    @venue = Venue.where(id: params[:id]).first
+    # @venue = Venue.where(id: params[:id]).first
     redirect_to(venues_path) && return if @venue.update(venue_params)
     render 'edit'
   end
