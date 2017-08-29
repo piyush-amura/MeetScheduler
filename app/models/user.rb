@@ -4,7 +4,7 @@
 # @author Piyush Wani <piyush.wani@amuratech.com>
 class User < ApplicationRecord
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
-  TYPES = %w[Employee Admin].freeze
+  TYPES = %w[User::Employee User::Admin].freeze
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :type, presence: true,
                    inclusion: { in: TYPES,
                                 message: '%<value>s restricted from use.' }
-  # Validations for name
+  # # Validations for name
   validates :name, presence: true
                   
   # many to many Association

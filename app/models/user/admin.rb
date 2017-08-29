@@ -3,7 +3,7 @@
 # This is a example of single table inheritance
 #
 # @author Piyush Wani <piyush.wani@amuratech.com>
-class Admin < User
+class User::Admin < User
   # method returns list of all scheduled meetings
   def scheduled_meetings
     Meeting.all
