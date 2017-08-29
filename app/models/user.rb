@@ -10,7 +10,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  self.reconfirmable = false       
+  self.reconfirmable = false
   # Validations for email using REGEX
   validates :email, length: { maximum: 100 },
                     format: EMAIL_REGEX
@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :type, presence: true,
                    inclusion: { in: TYPES,
                                 message: '%<value>s restricted from use.' }
-  # # Validations for name
+  # Validations for name
   validates :name, presence: true
                   
   # many to many Association
