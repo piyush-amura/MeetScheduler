@@ -21,7 +21,7 @@ class User < ApplicationRecord
                                 message: '%<value>s restricted from use.' }
   # Validations for name
   validates :name, presence: true
-                  
+
   # many to many Association
   has_and_belongs_to_many :meetings
 

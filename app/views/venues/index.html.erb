@@ -1,2 +1,23 @@
-<h1>Venues#index</h1>
-<p>Find me in app/views/venues/index.html.erb</p>
+<h1>Listing Venues</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Capacity</th>
+    <th>Status</th>
+  </tr>
+
+<% @venues.each do |venue| %>
+  <tr>
+    <td><%= venue.name %></td>
+    <td><%= venue.address %></td>
+    <td><%= venue.capacity %></td>
+    <td><%= venue.status %></td>
+    <td><%= link_to "Edit", edit_venue_path(venue) %></td>
+    <td><%= link_to "Remove", venue, method: :delete, data: { confirm: "Are you sure?" } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br>
