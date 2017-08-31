@@ -3,6 +3,7 @@
 # @author Piyush Wani <piyush.wani@amuratech.com>
 #
 class VenuesController < ApplicationController
+  before_action :authenticate_user!
   before_action only: %i[edit update] do
     @venue = Venue.where(id: params[:id]).first
   end
