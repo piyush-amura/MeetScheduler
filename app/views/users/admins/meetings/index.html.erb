@@ -27,6 +27,7 @@
       <td><%= meeting.organiser.name %></td>
       <td><%= link_to "Edit", edit_users_admins_meeting_url(meeting) %></td>
       <td><%= link_to "Remove", users_admins_meeting_path(meeting.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      <td><%= link_to "Add agenda", new_agenda_url(meeting.mom.id) %></td>
     </tr>
   <% end %>
   </table>

@@ -29,7 +29,7 @@ class VenuesController < ApplicationController
   #
   def create
     @venue = Venue.new(venue_params)
-    redirect_to(venues_path) if @venue.save
+    redirect_to(venues_path) && return if @venue.save
     render 'new'
   end
 

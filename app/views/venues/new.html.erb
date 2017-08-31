@@ -1,23 +1,5 @@
 <%= render partial: 'shared/navbar' %>
-<h1>----------- New Venue ------------ </h1>
+<h1>New Venue</h1>
 <%= form_for :venue, url: venues_path do |f| %>
-  <p>
-    <%= f.label :Name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :Capacity %><br>
-    <%= f.number_field :capacity %>
-  </p>
-  <p>
-    <%= f.label :Address %><br>
-    <%= f.text_area :address %>
-  </p>
-  <p>
-    <%= f.label :Status %><br>
-    <%= f.select :status, options_for_select(['available','not available']) %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<%= render partial: 'venues/forms', locals: {f: f} %>  
 <% end %>

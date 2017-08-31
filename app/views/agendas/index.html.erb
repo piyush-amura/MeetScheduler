@@ -1,0 +1,28 @@
+<%= render partial: 'shared/navbar' %>
+<h1>Listing Agendas</h1>
+<div class="table-responsive">
+  <table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Allocated Time</th>
+    <th>Action</th>
+    <th>Meeting_id</th>
+    <th>Edit</th>
+    <th>Remove</th>
+  </tr>
+
+  <% @agendas.each do |agenda| %>
+    <tr>
+      <td><%= agenda.name %></td>
+      <td><%= agenda.status %></td>
+      <td><%= agenda.allocated_time %></td>
+      <td><%= agenda.action %></td>
+      <td><%= agenda.mom.meeting.id %></td>
+      <td><%= link_to "Edit", edit_agenda_path(agenda) %></td>
+      <td><%= link_to "Remove", agenda, method: :delete, data: { confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+<br>
