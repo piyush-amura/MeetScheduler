@@ -2,40 +2,7 @@
 <h2>New Meeting</h2>
 
 <%= form_for :meeting, url: users_admins_meetings_url do |f| %>
-
-  <div class="field">
-    <%= f.label :key_note %><br />
-    <%= f.text_field :key_note, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.date_field :date, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :start_time %>
-    <%= f.time_field :start_time, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :duration %><br />
-    <%= f.number_field :duration, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.select :status, options_for_select(@status_list)%>
-  </div>
-
-  <div class="field">
-    <%= f.label :venue %><br />
-    <%= f.select :venue_id, options_for_select(@venues)%>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
+<%= render partial: 'users/shared/forms', locals: {f: f} %>
 <% end %>
 <% if user_signed_in? %>
   <li>
