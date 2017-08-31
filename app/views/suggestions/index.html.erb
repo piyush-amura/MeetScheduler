@@ -13,9 +13,10 @@
 
   <% @suggestions.each do |suggestion| %>
     <tr>
-      <td><%= suggestion.agenda.mom.meeting.id %></td>
-      <td><%= suggestion.agenda.name %></td>
-      <td><%= suggestion.user.name %></td>
+      <td><%= suggestion.agenda.mom.meeting.id.nil? ? 'N.A.' : suggestion.agenda.mom.meeting.id %>
+      </td>
+      <td><%= suggestion.agenda.name.nil? ? 'N.A.' : suggestion.agenda.name %></td>
+      <td><%= suggestion.user.name.nil? ? 'N.A.' : suggestion.user.name%></td>
       <td><%= suggestion.suggestion %></td>
       <td><%= link_to "Edit", edit_suggestion_path(suggestion) %></td>
       <td><%= link_to "Remove", suggestion, method: :delete, data: { confirm: "Are you sure?" } %></td>

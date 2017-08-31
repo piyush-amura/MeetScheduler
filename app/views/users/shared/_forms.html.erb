@@ -5,7 +5,7 @@
 
 <div class="form-group">
   <%= f.label :date %><br />
-  <%= f.date_field :date, autofocus: true %>
+  <%= f.date_field :date, min: Date.today, autofocus: true %>
 </div>
 
 <div class="form-group">
@@ -20,12 +20,12 @@
 
 <div class="form-group">
   <%= f.label :status %><br />
-  <%= f.select :status, options_for_select(@status_list)%>
+  <%= f.select :status, options_for_select(@status_list.nil? ? ['not available']: @status_list)%>
 </div>
 
 <div class="form-group">
   <%= f.label :venue %><br />
-  <%= f.select :venue_id, options_for_select(@venues)%>
+  <%= f.select :venue_id, options_for_select(@venues.nil? ? ['not available']: @venues)%>
 </div>
 
 <div class="actions">

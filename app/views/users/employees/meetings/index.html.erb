@@ -23,8 +23,8 @@
       <td><%= meeting.date %></td>
       <td><%= meeting.start_time.strftime('%H:%M') %></td>
       <td><%= meeting.duration%></td>
-      <td><%= meeting.venue.name %></td>
-      <td><%= meeting.organiser.name %></td>
+      <td><%= meeting.venue.name.nil? ? 'not available' : meeting.venue.name %></td>
+      <td><%= meeting.organiser.name.nil? ? 'not available' : meeting.organiser.name %></td>
       <td><%= link_to "Edit", edit_users_employees_meeting_url(meeting) %></td>
       <td><%= link_to "Remove", users_employees_meeting_path(meeting.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
       <td><%= link_to "Add agenda", new_agenda_url(mom_id: meeting.mom.id)  %></td>

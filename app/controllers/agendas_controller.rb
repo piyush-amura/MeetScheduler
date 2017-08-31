@@ -10,6 +10,8 @@ class AgendasController < ApplicationController
 
   def new
     @mom_id = params[:mom_id]
+    p '--------'
+    p @mom_id
   end
 
   def create
