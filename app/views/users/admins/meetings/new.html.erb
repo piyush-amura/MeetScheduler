@@ -1,16 +1,7 @@
-<h1>Users::Admins::Meetings#new</h1>
+<%= render partial: 'shared/navbar' %>
 <h2>New Meeting</h2>
 <div class='form' />
   <%= form_for :meeting, url: users_admins_meetings_url do |f| %>
   <%= render partial: 'users/shared/forms', locals: {f: f} %>
   <% end %>
 </div>
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
-<% end %>

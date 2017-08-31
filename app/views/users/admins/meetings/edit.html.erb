@@ -1,13 +1,5 @@
+<%= render partial: 'shared/navbar' %>
 <h1>Users::Admins::Meetings#edit</h1>
 <%= form_for @meeting, method: 'patch', url: users_admins_meeting_path do |f| %>
 <%= render partial: 'users/shared/forms', locals: {f: f} %>
-<% end %>
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
 <% end %>
