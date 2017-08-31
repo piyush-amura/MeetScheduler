@@ -1,34 +1,35 @@
-<p>Find me in app/views/users/admins/meetings/index.html.erb</p>
-<h1>Listing Meetings</h1>
+<h1 >Listing Meetings</h1>
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Key Note</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>Duration(In min)</th>
+      <th>Venue</th>
+      <th>Organiser</th>   
+      <th>Edit</th>
+      <th>Delete</th>      
+    </tr>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Key Note</th>
-    <th>Status</th>
-    <th>Date</th>
-    <th>Start Time</th>
-    <th>Duration(In min)</th>
-    <th>Venue</th>
-    <th>Organiser</th>   
-  </tr>
-
-<% @meetings.each do |meeting| %>
-  <tr>
-    <td><%= meeting.id %></td>
-    <td><%= meeting.key_note %></td>
-    <td><%= meeting.status %></td>
-    <td><%= meeting.date %></td>
-    <td><%= meeting.start_time.strftime('%H:%M') %></td>
-    <td><%= meeting.duration%></td>
-    <td><%= meeting.venue.name %></td>
-    <td><%= meeting.organiser.name %></td>
-    <td><%= link_to "Edit", edit_users_admins_meeting_url(meeting) %></td>
-    <td><%= link_to "Remove", users_admins_meeting_path(meeting.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
-  </tr>
-<% end %>
-</table>
-
+  <% @meetings.each do |meeting| %>
+    <tr>
+      <td><%= meeting.id %></td>
+      <td><%= meeting.key_note %></td>
+      <td><%= meeting.status %></td>
+      <td><%= meeting.date %></td>
+      <td><%= meeting.start_time.strftime('%H:%M') %></td>
+      <td><%= meeting.duration%></td>
+      <td><%= meeting.venue.name %></td>
+      <td><%= meeting.organiser.name %></td>
+      <td><%= link_to "Edit", edit_users_admins_meeting_url(meeting) %></td>
+      <td><%= link_to "Remove", users_admins_meeting_path(meeting.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
 <br>
 
 

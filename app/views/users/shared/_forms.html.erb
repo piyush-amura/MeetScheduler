@@ -1,29 +1,29 @@
-<div class="field">
+<div class="form-group">
   <%= f.label :key_note %><br />
   <%= f.text_field :key_note, autofocus: true %>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :date %><br />
   <%= f.date_field :date, autofocus: true %>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :start_time %>
   <%= f.time_field :start_time, autocomplete: "off" %>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :duration %><br />
   <%= f.number_field :duration, autocomplete: "off" %>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :status %><br />
   <%= f.select :status, options_for_select(@status_list)%>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :venue %><br />
   <%= f.select :venue_id, options_for_select(@venues)%>
 </div>
