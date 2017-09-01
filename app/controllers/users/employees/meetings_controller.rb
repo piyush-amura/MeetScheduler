@@ -30,7 +30,9 @@ class Users::Employees::MeetingsController < ApplicationController
   end
 
   def index
-    @meetings = Meeting.all
+    @past_meetings = current_user.past_meetings
+    @upcoming_meetings = current_user.upcoming_meetings
+    @organised_meetings = current_user.organised_meetings 
     p @user_id
   end
 
