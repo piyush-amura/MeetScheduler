@@ -48,7 +48,7 @@ class Users::Admins::MeetingsController < ApplicationController
         s.push(k) if v == '1'
       end
       s.each { |id| meet.members << User.find(id) }
-      redirect_to(users_employees_meetings_url)
+      redirect_to(users_admins_meetings_url)
     else
       @users = User.all
       @meeting_id = params[:id]
@@ -67,7 +67,7 @@ class Users::Admins::MeetingsController < ApplicationController
         s.push(k) if v == '1'
       end
       s.each { |id| meet.members.destroy(User.find(id)) }
-      redirect_to(users_employees_meetings_url)
+      redirect_to(users_admins_meetings_url)
     else
       @users = User.all
       @meeting_id = params[:id]

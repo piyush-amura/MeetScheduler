@@ -14,12 +14,15 @@ class AgendasController < ApplicationController
 
   def create
     params.require(:agenda).permit!
-    mom_id = params[:agenda][:mom_id]
     @agenda = Agenda.new(agenda_params)
     if @agenda.save!
-      redirect_to agendas_path(mom_id: mom_id)
+      if current_user.is_a?(User::Admin)
+        redirect_to users_admins_meetings_url
+      else
+        redirect_to users_employees_meetings_url
+      end
     else
-    render 'new'
+      render 'new'
     end
   end
 
@@ -41,10 +44,10 @@ class AgendasController < ApplicationController
 
   def index
     if params[:mom_id].nil?
-      @agendas=Agenda.all
+      @agendas = Agenda.all
     else
       @agendas = Agenda.where(mom_id: params[:mom_id])
-    end  
+    end
   end
 
   def agenda_params
