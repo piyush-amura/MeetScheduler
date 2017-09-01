@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   namespace :users do
     namespace :employees do
-      resources :meetings
+      resources :meetings do
+        get 'add_members', on: :member
+        post 'add_members', on: :member
+      end
     end
   end
 
