@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       resources :meetings do
         get 'add_members', on: :member
         post 'add_members', on: :member
+        get 'remove_members', on: :member
+        post 'remove_members', on: :member
       end
     end
   end
@@ -13,7 +15,6 @@ Rails.application.routes.draw do
       resources :meetings
     end
   end
-
 
   devise_for :users
   resources :venues, :agendas, :suggestions

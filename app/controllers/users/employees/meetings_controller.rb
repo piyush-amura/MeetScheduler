@@ -57,6 +57,24 @@ class Users::Employees::MeetingsController < ApplicationController
     end  
   end
 
+  def remove_members
+    if request.post?
+      params.require(:selected).permit!
+      meet = Meeting.where(id: params[:meeting_id]).first
+      s = []
+      params[:selected].to_h.each do |k, v|
+        s.push(k) if v == '1'
+      end
+      s.each { |id| meet.members.destroy(User.find(id)) }
+      redirect_to(users_employees_meetings_url)
+    else
+      @users = User.all
+      @meeting_id = params[:id]
+      meet = Meeting.find(@meeting_id)
+      @included_members = meet.members
+    end  
+  end
+
   private
 
   def meeting_params
