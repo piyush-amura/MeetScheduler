@@ -7,33 +7,44 @@ class AgendasController < ApplicationController
   before_action only: %i[edit update] do
     @agenda = Agenda.where(id: params[:id]).first
   end
-
+    
   def new
     @mom_id = params[:mom_id]
-    p '--------'
-    p @mom_id
   end
 
   def create
-    puts params[:agenda]
+    params.require(:agenda).permit!
+    mom_id = params[:agenda][:mom_id]
     @agenda = Agenda.new(agenda_params)
-    redirect_to(agendas_path) && return if @agenda.save!
+    if @agenda.save!
+      redirect_to agendas_path(mom_id: mom_id)
+    else
     render 'new'
+    end
   end
 
   def edit; end
 
   def update
-    redirect_to(agendas_path) && return if @agenda.update(agenda_params)
-    render 'edit'
+    mom_id = params[:agenda][:mom_id]
+    if @agenda.update(agenda_params)
+      redirect_to agendas_path(mom_id: mom_id)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    redirect_to(agendas_path) if Agenda.find(params[:id]).destroy
+    m_id = params[:mom_id]
+    redirect_to agendas_path(mom_id: m_id) if Agenda.find(params[:id]).destroy
   end
 
   def index
-    @agendas = Agenda.all
+    if params[:mom_id].nil?
+      @agendas=Agenda.all
+    else
+      @agendas = Agenda.where(mom_id: params[:mom_id])
+    end  
   end
 
   def agenda_params

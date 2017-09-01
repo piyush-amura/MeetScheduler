@@ -12,7 +12,11 @@
       <th>Venue</th>
       <th>Organiser</th>
       <th>Edit</th>
-      <th>Delete</th>      
+      <th>Delete</th>
+      <th>Add agenda</th>
+      <th>List agendas</th>
+      <th>Add Members</th>
+      <th>Remove Members</th>
     </tr>
 
   <% @meetings.each do |meeting| %>
@@ -28,6 +32,7 @@
       <td><%= link_to "Edit", edit_users_employees_meeting_url(meeting) %></td>
       <td><%= link_to "Remove", users_employees_meeting_path(meeting.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
       <td><%= link_to "Add agenda", new_agenda_url(mom_id: meeting.mom.id) %></td>
+      <td><%= link_to "List agendas", agendas_url(mom_id: meeting.mom.id) %></td>
       <td><%= link_to "Add Members", add_members_users_employees_meeting_url(meeting) %></td>
       <td><%= link_to "Remove Members", remove_members_users_employees_meeting_url(meeting) %></td>
     </tr>

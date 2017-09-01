@@ -12,32 +12,44 @@ class SuggestionsController < ApplicationController
   end
 
   def create
-    puts params[:suggestion]
+    a_id = params[:suggestion][:agenda_id]
     @suggestion = Suggestion.new(suggestion_params)
     @suggestion.user = current_user
-    redirect_to(suggestions_path) && return if @suggestion.save!
-    render 'new'
+    if @suggestion.save!
+      redirect_to suggestions_path(agenda_id: a_id)
+    else
+      render 'new'
+    end
   end
 
   def edit; end
 
   def update
-    redirect_to(suggestions_path) && return if @suggestion.update(suggestion_params)
-    render 'edit'
+    a_id = params[:suggestion][:agenda_id]
+    if @suggestion.update(suggestion_params)
+      redirect_to suggestions_path(agenda_id: a_id)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    redirect_to(suggestions_path) if Suggestion.find(params[:id]).destroy
+    if Suggestion.find(params[:id]).destroy
+      redirect_to suggestions_path(agenda_id: params[:agenda_id])
+    end   
   end
 
   def index
-    @suggestions = Suggestion.all
+    if params[:agenda_id].nil?
+      @suggestions = Suggestion.all
+    else
+      @suggestions = Suggestion.where(agenda_id: params[:agenda_id])
+    end
   end
 
   def suggestion_params
     params.require(:suggestion).permit(:suggestion, :agenda_id)
   end
 
-  def show
-  end
+  def show; end
 end

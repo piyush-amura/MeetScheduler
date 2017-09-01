@@ -39,6 +39,43 @@ class Users::Admins::MeetingsController < ApplicationController
     redirect_to(users_admins_meetings_url) if Meeting.find(params[:id]).destroy
   end
 
+  def add_members
+    if request.post?
+      params.require(:selected).permit!
+      meet = Meeting.where(id: params[:meeting_id]).first
+      s = []
+      params[:selected].to_h.each do |k, v|
+        s.push(k) if v == '1'
+      end
+      s.each { |id| meet.members << User.find(id) }
+      redirect_to(users_employees_meetings_url)
+    else
+      @users = User.all
+      @meeting_id = params[:id]
+      meet = Meeting.find(@meeting_id)
+      @included_members = meet.members
+      @remaining_members = (User.all.to_a - meet.members.to_a).to_a
+    end  
+  end
+
+  def remove_members
+    if request.post?
+      params.require(:selected).permit!
+      meet = Meeting.where(id: params[:meeting_id]).first
+      s = []
+      params[:selected].to_h.each do |k, v|
+        s.push(k) if v == '1'
+      end
+      s.each { |id| meet.members.destroy(User.find(id)) }
+      redirect_to(users_employees_meetings_url)
+    else
+      @users = User.all
+      @meeting_id = params[:id]
+      meet = Meeting.find(@meeting_id)
+      @included_members = meet.members
+    end  
+  end
+
   private
 
   def meeting_params

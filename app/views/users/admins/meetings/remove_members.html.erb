@@ -1,0 +1,10 @@
+<%= form_for :selected, url: remove_members_users_employees_meeting_url do |f| %>
+<h3>Members </h3> 
+<% @included_members.each do |user| %>
+  <%= user.name %>
+  <%= f.check_box(user.id) %>
+  <br>
+<% end %>
+<%= hidden_field_tag "meeting_id", "#{@meeting_id}" %>
+<%= f.submit "Submit" %>
+<% end %>

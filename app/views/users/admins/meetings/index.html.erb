@@ -1,5 +1,5 @@
 <%= render partial: 'shared/navbar' %>
-<h1 >Listing Meetings</h1>
+<h1>Listing Meetings</h1>
 <div class="table-responsive">
   <table class="table">
     <tr>
@@ -10,9 +10,13 @@
       <th>Start Time</th>
       <th>Duration(In min)</th>
       <th>Venue</th>
-      <th>Organiser</th>   
+      <th>Organiser</th>
       <th>Edit</th>
-      <th>Delete</th>      
+      <th>Delete</th>
+      <th>Add agenda</th>
+      <th>List agendas</th>
+      <th>Add Members</th>
+      <th>Remove Members</th>
     </tr>
 
   <% @meetings.each do |meeting| %>
@@ -28,6 +32,9 @@
       <td><%= link_to "Edit", edit_users_admins_meeting_url(meeting) %></td>
       <td><%= link_to "Remove", users_admins_meeting_path(meeting.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
       <td><%= link_to "Add agenda", new_agenda_url(mom_id: meeting.mom.id) %></td>
+      <td><%= link_to "List agendas", agendas_url(mom_id: meeting.mom.id) %></td>
+      <td><%= link_to "Add Members", add_members_users_admins_meeting_url(meeting) %></td>
+      <td><%= link_to "Remove Members", remove_members_users_admins_meeting_url(meeting) %></td>
     </tr>
   <% end %>
   </table>

@@ -8,9 +8,10 @@
     <th>Allocated Time</th>
     <th>Action</th>
     <th>Meeting_id</th>
-    <th>Add Suggestion</th>
     <th>Edit</th>
     <th>Remove</th>
+    <th>Add Suggestion</th>
+    <th>List Suggestion</th>
   </tr>
 
   <% @agendas.each do |agenda| %>
@@ -20,9 +21,10 @@
       <td><%= agenda.allocated_time %></td>
       <td><%= agenda.action %></td>
       <td><%= agenda.mom.meeting.id %></td>
-      <td><%= link_to "Add suggestion", new_suggestion_url(agenda_id: agenda.id) %></td>
       <td><%= link_to "Edit", edit_agenda_path(agenda) %></td>
-      <td><%= link_to "Remove", agenda, method: :delete, data: { confirm: "Are you sure?" } %></td>
+      <td><%= link_to "Remove", agenda_path(id: agenda.id, mom_id: agenda.mom.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      <td><%= link_to "Add suggestion", new_suggestion_url(agenda_id: agenda.id) %></td>
+      <td><%= link_to "List suggestion", suggestions_url(agenda_id: agenda.id) %></td>
     </tr>
   <% end %>
   </table>
