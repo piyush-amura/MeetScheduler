@@ -1,23 +1,26 @@
+<%= render partial: 'shared/navbar' %>
 <h1>Listing Venues</h1>
-
-<table>
+<div class="table-responsive">
+  <table class="table">
   <tr>
     <th>Name</th>
     <th>Address</th>
     <th>Capacity</th>
     <th>Status</th>
+    <th>Edit</th>
+    <th>Remove</th>
   </tr>
 
-<% @venues.each do |venue| %>
-  <tr>
-    <td><%= venue.name %></td>
-    <td><%= venue.address %></td>
-    <td><%= venue.capacity %></td>
-    <td><%= venue.status %></td>
-    <td><%= link_to "Edit", edit_venue_path(venue) %></td>
-    <td><%= link_to "Remove", venue, method: :delete, data: { confirm: "Are you sure?" } %></td>
-  </tr>
-<% end %>
-</table>
-
+  <% @venues.each do |venue| %>
+    <tr>
+      <td><%= venue.name %></td>
+      <td><%= venue.address %></td>
+      <td><%= venue.capacity %></td>
+      <td><%= venue.status %></td>
+      <td><%= link_to "Edit", edit_venue_path(venue) %></td>
+      <td><%= link_to "Remove", venue, method: :delete, data: { confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
 <br>

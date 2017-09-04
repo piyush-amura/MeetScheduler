@@ -1,0 +1,28 @@
+<%= render partial: 'shared/navbar' %>
+<h1>Listing Suggestions</h1>
+<div class="table-responsive">
+  <table class="table">
+  <tr>
+    <th>Meeting_id</th>
+    <th>User</th>
+    <th>Suggestion</th>
+    <th>Edit</th>
+    <th>Remove</th>
+  </tr>
+  <% @suggestions.each do |suggestion| %>
+    <tr>
+      <td><%= suggestion.agenda.mom.meeting.id.nil? ? 'N.A.' : suggestion.agenda.mom.meeting.id %>
+      </td>
+      <td><%= suggestion.user.name.nil? ? 'N.A.' : suggestion.user.name%></td>
+      <td><%= suggestion.suggestion %></td>
+      <% if suggestion.user == current_user || current_user.is_a?(User :: Admin) %>
+        <td><%= link_to "Edit", edit_suggestion_path(suggestion) %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <td><%= link_to "Remove",suggestion_path(id: suggestion.id, agenda_id: suggestion.agenda.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+<br>

@@ -3,6 +3,7 @@
 # @author Piyush Wani <piyush.wani@amuratech.com>
 #
 class VenuesController < ApplicationController
+  before_action :authenticate_user!
   before_action only: %i[edit update] do
     @venue = Venue.where(id: params[:id]).first
   end
@@ -28,7 +29,7 @@ class VenuesController < ApplicationController
   #
   def create
     @venue = Venue.new(venue_params)
-    redirect_to(venues_path) if @venue.save
+    redirect_to(venues_path) && return if @venue.save
     render 'new'
   end
 

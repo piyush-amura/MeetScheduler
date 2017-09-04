@@ -1,22 +1,5 @@
+<%= render partial: 'shared/navbar' %>
 <h1>----------- Update Venue ------------ </h1>
-<%= form_for :venue, url: venue_path, method: 'patch' do |f| %>
-  <p>
-    <%= f.label :Name %><br>
-    <%= f.text_field :name, value: @venue.name %>
-  </p>
-  <p>
-    <%= f.label :Capacity %><br>
-    <%= f.number_field :capacity, value: @venue.capacity %>
-  </p>
-  <p>
-    <%= f.label :Address %><br>
-    <%= f.text_area :address, value: @venue.address %>
-  </p>
-  <p>
-    <%= f.label :Status %><br>
-    <%= f.select :status, options_for_select(['available','not available'],selected: @venue.status) %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+<%= form_for @venue, url: venue_path, method: 'patch' do |f| %>
+<%= render partial: 'venues/forms', locals: {f: f} %>  
 <% end %>
