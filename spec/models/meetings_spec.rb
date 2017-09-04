@@ -2,10 +2,6 @@ require 'rails_helper'
 require 'spec_helper'
 RSpec.describe Meeting, type: :model do
   describe 'valid meetings' do
-    before(:each) do
-      m = Meeting.new(start_time: Time.now, key_note: 'key note',
-                     duration: 30, organiser_id: 1, venue_id: 2, date: Date.today)
-      end
     describe 'Associations' do
       it { should have_and_belong_to_many(:members) }
       it { should belong_to(:venue) }
@@ -22,8 +18,7 @@ RSpec.describe Meeting, type: :model do
   end
   describe 'invalid meetings' do
     before(:each) do
-      @m = Meeting.new(start_time: Time.now, key_note: 'key note',
-              duration: 30, organiser_id: 1, venue_id: 2, date: Date.today)
+      @m = Meeting.first
     end
 
     it 'date is not valid' do
