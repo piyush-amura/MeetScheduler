@@ -41,6 +41,8 @@ class Meeting < ApplicationRecord
   # date should not be from past
   # adds a error to error array
   def date_validation
-    errors.add(:date, ': cannot select past date.') if date < Date.today
+    unless date.nil?
+      errors.add(:date, ': cannot select past date.') if date < Date.today
+    end
   end
 end
