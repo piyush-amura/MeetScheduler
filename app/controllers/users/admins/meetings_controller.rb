@@ -26,7 +26,10 @@ class Users::Admins::MeetingsController < ApplicationController
   def create
     meeting = Meeting.new(meeting_params)
     meeting.organiser = current_user
-    meeting.save!
+    meeting.save
+    m = Mom.new(summary: 'default')
+    m.meeting = meeting
+    m.save!
     redirect_to(users_admins_meetings_url)
   end
 

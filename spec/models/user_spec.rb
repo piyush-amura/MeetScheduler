@@ -27,11 +27,9 @@ RSpec.describe User, type: :model do
       expect(@m).to_not be_valid
     end
 
-    # describe 'uniqueness' do
-    #   # @m=User.first
-    #   # @m.email=User.second.email
-    #   subject { User.create(name: 'something', email: User.first.email, type: 'User::Employee') }
-    #   it { should_not validate_uniqueness_of(:email) }
-    # end
+    describe 'uniqueness' do
+      subject { User.first }
+      it { should_not validate_uniqueness_of(:email) }
+    end
   end
 end

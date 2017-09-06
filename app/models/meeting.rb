@@ -5,7 +5,7 @@ class Meeting < ApplicationRecord
 
   belongs_to :venue
   has_and_belongs_to_many :members, class_name: 'User'
-  has_one :mom
+  has_one :mom , dependent: :destroy
 
   validates :date, presence: true
   validates :start_time, presence: true

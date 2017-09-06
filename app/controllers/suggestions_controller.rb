@@ -36,7 +36,7 @@ class SuggestionsController < ApplicationController
   def destroy
     if Suggestion.find(params[:id]).destroy
       redirect_to suggestions_path(agenda_id: params[:agenda_id])
-    end   
+    end
   end
 
   def index

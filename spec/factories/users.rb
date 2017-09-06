@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :user do
-    email 'piyushw13@gmail.com'
-    password '123456'
+    name 'piyush'
+    email 'piyush22@gmail.com'
+    password '1234567'
+    password_confirmation '1234567'
+    confirmed_at Time.now
+    type 'User::Admin'
   end
-  # factory :admin, class: User do
-  #   email 'piyushwww13@gmail.com'
-  #   password '1234567'
-  # end
 end
