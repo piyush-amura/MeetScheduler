@@ -66,6 +66,15 @@ RSpec.describe VenuesController do
     end
   end
 
+  describe '#invalid edit' do
+    params = { id: 5 ,venue: { name: 'Foo', address: 'pune', capacity: 'cv' }}
+    subject { patch :update, params: params }
+
+    it 'redirects to venues_url' do
+      expect(subject).to render_template(:edit)
+    end
+  end
+
   describe '#destroy' do
     subject { delete :destroy, params: { id: 5 } }
     it 'should return status 302' do

@@ -11,6 +11,7 @@ RSpec.describe User, type: :model do
       it { should validate_presence_of(:email) }
       it { should validate_presence_of(:type) }
     end
+
   end
   describe 'invalid user' do
     before(:each) do
@@ -31,5 +32,19 @@ RSpec.describe User, type: :model do
       subject { User.first }
       it { should_not validate_uniqueness_of(:email) }
     end
+
+    it 'organised meetings' do
+      id = @m.id
+      expect(@m.organised_meetings).to eq Meeting.where(organiser_id: id)
+    end
+
+    it 'past_meetings' do
+      expect(@m.past_meetings).to eq @m.meetings.where(['date < ?', Date.today])
+    end
+
+    it 'upcoming meetings' do
+      expect(@m.upcoming_meetings).to eq @m.meetings.where(['date < ?', Date.today])
+    end
+
   end
 end

@@ -17,6 +17,18 @@ RSpec.describe SuggestionsController do
     end
   end
 
+  describe 'GET #index with params' do
+
+    subject { get :index, params: { agenda_id: Agenda.first.id } }
+
+    it 'renders the index template' do
+      expect(subject).to render_template(:index)
+    end
+
+    it 'does not render a different template' do
+      expect(subject).to_not render_template(:new)
+    end
+  end
   describe 'GET #new' do
     subject { get :new }
 
@@ -50,10 +62,10 @@ RSpec.describe SuggestionsController do
   end
 
   describe '#invalid create' do
-    subject { post :create, params: { suggestion: { user_id: 1, agenda_id: 1, suggestion: "backj" } } }
+    subject { post :create, params: { suggestion: { user_id: 1, agenda_id: 1 } } }
 
     it 'doesn\'t redirects to suggestions_url' do
-      expect(subject).to_not redirect_to action: :index
+      expect(subject).to render_template(:new)
     end
   end
 
@@ -63,6 +75,15 @@ RSpec.describe SuggestionsController do
 
     it 'redirects to suggestions_url' do
       expect(subject).to redirect_to suggestions_path
+    end
+  end
+
+  describe '#invalid edit' do
+    params = { suggestion: { agenda_id: '3', suggestion: 'cas' }, id: 1 }
+    subject { patch :update, params: params }
+
+    it 'redirects to suggestions_url' do
+      expect(subject).to render_template(:edit)
     end
   end
 

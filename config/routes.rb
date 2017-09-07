@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+
   namespace :users do
     namespace :employees do
       resources :meetings do
@@ -21,7 +24,9 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users
+  devise_scope :user do
+    root to: 'devise/sessions#new'
+  end
   resources :venues, :agendas, :suggestions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

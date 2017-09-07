@@ -104,6 +104,21 @@ RSpec.describe Users::Admins::MeetingsController, type: :controller do
     end
   end
 
+  describe '#invalid edit' do
+    params = { meeting: { date: '2017-09-07',
+                          start_time: '2000-01-01 10:00:00',
+                          key_note: 'first meeting',
+                          duration: 'gj',
+                          venue_id: 5 },
+               id: User::Admin::Meeting.first
+    }
+    subject { patch :update, params: params }
+
+    it 'redirects to meetings_url' do
+      expect(subject).to render_template(:edit)
+    end
+  end
+
   describe '#destroy' do
     subject { delete :destroy, params: { id: User::Admin::Meeting.last } }
     it 'should return status 302' do
@@ -117,6 +132,41 @@ RSpec.describe Users::Admins::MeetingsController, type: :controller do
       expect(response.status).to_not be(302)
     end
   end
+
+  describe '#add member' do
+    subject { get :add_members, params: { id: Meeting.first.id } }
+    it 'should render add_members template' do
+      expect(subject).to render_template(:add_members)
+    end
+  end
+
+  describe '#add member post request' do
+    subject { post :add_members, params: { meeting_id: Meeting.first.id,
+                                          selected: { '13' => '0'},
+                                          id:'74'
+                                           } }
+    it 'should return status 302' do
+      expect(subject).to redirect_to(users_admins_meetings_url)
+    end
+  end
+
+  describe '#remove member' do
+    subject { get :remove_members, params: { id: Meeting.first.id } }
+    it 'should render remove_members template' do
+      expect(subject).to render_template(:remove_members)
+    end
+  end
+
+  describe '#remove member post request' do
+    subject { post :remove_members, params: { meeting_id: Meeting.first.id,
+                                          selected: { '13' => '0'},
+                                          id:'74'
+                                           } }
+    it 'should return status 302' do
+      expect(subject).to redirect_to(users_admins_meetings_url)
+    end
+  end
+
 end
 
 RSpec.describe Users::Employees::MeetingsController, type: :controller do
@@ -222,6 +272,22 @@ RSpec.describe Users::Employees::MeetingsController, type: :controller do
     end
   end
 
+  describe '#invalid edit' do
+    params = { meeting: { date: '2017-09-07',
+                          start_time: '2000-01-01 10:00:00',
+                          key_note: 'first meeting',
+                          duration: 'gj',
+                          venue_id: 5 },
+               id: User::Employee::Meeting.first
+    }
+    subject { patch :update, params: params }
+
+    it 'redirects to meetings_url' do
+      expect(subject).to render_template(:edit)
+    end
+  end
+
+
   describe '#destroy' do
     subject { delete :destroy, params: { id: User::Employee::Meeting.last } }
     it 'should return status 302' do
@@ -235,4 +301,39 @@ RSpec.describe Users::Employees::MeetingsController, type: :controller do
       expect(response.status).to_not be(302)
     end
   end
+
+  describe '#add member' do
+    subject { get :add_members, params: { id: Meeting.first.id } }
+    it 'should render add_members template' do
+      expect(subject).to render_template(:add_members)
+    end
+  end
+
+  describe '#add member post request' do
+    subject { post :add_members, params: { meeting_id: Meeting.first.id,
+                                          selected: { '13' => '0'},
+                                          id:'74'
+                                           } }
+    it 'should return status 302' do
+      expect(subject).to redirect_to(users_employees_meetings_url)
+    end
+  end
+
+  describe '#remove member' do
+    subject { get :remove_members, params: { id: Meeting.first.id } }
+    it 'should render remove_members template' do
+      expect(subject).to render_template(:remove_members)
+    end
+  end
+
+  describe '#remove member post request' do
+    subject { post :remove_members, params: { meeting_id: Meeting.first.id,
+                                          selected: { '13' => '0'},
+                                          id:'74'
+                                           } }
+    it 'should return status 302' do
+      expect(subject).to redirect_to(users_employees_meetings_url)
+    end
+  end
+
 end

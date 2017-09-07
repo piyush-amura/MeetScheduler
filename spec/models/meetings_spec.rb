@@ -42,13 +42,17 @@ RSpec.describe Meeting, type: :model do
     end
 
     it 'organiser is not valid' do
-      @m.organiser_id = nil
-      expect(@m).to_not be_valid
+      @m.organiser_id = User.last.id
+      expect(@m).to be_valid
     end
 
     it 'venue is not valid' do
       @m.venue = nil
       expect(@m).to_not be_valid
+    end
+
+    it 'organiser should be present' do
+      expect(@m.organiser).to eq User.where(id: @m.organiser_id).first
     end
   end
 end
