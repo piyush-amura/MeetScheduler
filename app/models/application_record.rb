@@ -2,6 +2,6 @@
 # This is a self generated class
 # @author Piyush Wani <piyush.wani@amuratech.com>
 #
-class ApplicationRecord < ActiveRecord::Base
+class ApplicationRecord 
   self.abstract_class = true
 end

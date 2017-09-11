@@ -1,11 +1,21 @@
 # Class Meeting provides model for meetings table
 # @author Piyush Wani <piyush.wani@amuratech.com>
-class Meeting < ApplicationRecord
+class Meeting
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
   TYPES = %w[on\ time delayed canceled].freeze
 
-  belongs_to :venue
+  belongs_to :venue, foreign_key: :venue_id, index: true
+  belongs_to :organiser, class_name: 'User', foreign_key: :organiser_id, index: true
   has_and_belongs_to_many :members, class_name: 'User'
   has_one :mom , dependent: :destroy
+
+  field 'date',       type: Date
+  field 'start_time', type: Time
+  field 'status',     type: String, default: 'on time'
+  field 'key_note',   type: String
+  field 'duration',   type: Float
 
   validates :date, presence: true
   validates :start_time, presence: true

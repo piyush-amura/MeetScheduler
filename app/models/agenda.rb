@@ -2,11 +2,22 @@
 # Class Agenda provides information about agendas
 # of the Meeting.
 # @author Piyush Wani <piyush.wani@amuratech.com>
-class Agenda < ApplicationRecord
+class Agenda
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
   TYPES = %w[approval\ needed approved not\ approved].freeze
-  belongs_to :mom
-  has_many :suggestions, -> { select(:suggestion) }
+  
+  belongs_to :mom, foreign_key: :mom_id, index: true
+  has_many :suggestions 
+  # -> { pluck(:suggestion) }
   has_many :suggestions, dependent: :destroy
+
+  # t.references :mom, index: true, foreign_key: true, null: false
+  field 'name',           type: String
+  field 'allocated_time', type: Integer, default: 30
+  field 'action',         type: String
+  field 'status',         type: String, default: 'approval needed'
 
   validates :mom_id, presence: true
   validates :name, presence: true
