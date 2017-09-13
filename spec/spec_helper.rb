@@ -17,6 +17,8 @@ require 'factory_girl_rails'
 require 'simplecov'
 SimpleCov.start
 
+# Mongoid.load!('./spec/config/mongoid.yml')
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
