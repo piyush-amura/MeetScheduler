@@ -26,6 +26,9 @@ class Users::Employees::MeetingsController < ApplicationController
     meeting = Meeting.new(meeting_params)
     meeting.organiser = current_user
     meeting.save!
+    m = Mom.new(summary: 'default')
+    m.meeting = meeting
+    m.save!
     redirect_to(users_employees_meetings_url)
   end
 

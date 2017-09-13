@@ -1,13 +1,58 @@
 require 'rails_helper'
-
+require 'spec_helper'
 RSpec.describe Meeting, type: :model do
-  it 'meeting belongs to a venue' do
-    m = Meeting.reflect_on_association(:venue)
-    expect(m.macro).to eq(:belongs_to)
+  describe 'valid meetings' do
+    describe 'Associations' do
+      it { should have_and_belong_to_many(:members) }
+      it { should belong_to(:venue) }
+      it { should have_one(:mom) }
+    end
+    describe 'Attributes' do
+      it { should validate_presence_of(:start_time) }
+      it { should validate_presence_of(:duration) }
+      it { should validate_presence_of(:key_note) }
+      it { should validate_presence_of(:date) }
+      it { should validate_presence_of(:venue_id) }
+      it { should validate_presence_of(:organiser_id) }
+    end
   end
+  describe 'invalid meetings' do
+    before(:each) do
+      @m = Meeting.first
+    end
 
-  it 'meeting belongs to a organiser' do
-    m = Meeting.reflect_on_association(:members)
-    expect(m.macro).to eq(:has_and_belongs_to_many)
+    it 'date is not valid' do
+      @m.date = nil
+      expect(@m).to_not be_valid
+    end
+
+    it 'key note is not valid' do
+      @m.key_note = nil
+      expect(@m).to_not be_valid
+    end
+
+    it 'start_time is not valid' do
+      @m.start_time = nil
+      expect(@m).to_not be_valid
+    end
+
+    it 'duration is not valid' do
+      @m.duration = nil
+      expect(@m).to_not be_valid
+    end
+
+    it 'organiser is not valid' do
+      @m.organiser_id = User.last.id
+      expect(@m).to be_valid
+    end
+
+    it 'venue is not valid' do
+      @m.venue = nil
+      expect(@m).to_not be_valid
+    end
+
+    it 'organiser should be present' do
+      expect(@m.organiser).to eq User.where(id: @m.organiser_id).first
+    end
   end
 end

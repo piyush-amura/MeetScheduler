@@ -19,10 +19,4 @@ class Venue < ApplicationRecord
   validates :capacity, numericality: { greater_than: 0,
                                        only_integer: true }
 
-  # method for checking availability
-  # of the venue
-  # returns boolean value
-  def available?
-    status == 'available'
-  end
 end

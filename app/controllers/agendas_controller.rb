@@ -15,7 +15,7 @@ class AgendasController < ApplicationController
   def create
     params.require(:agenda).permit!
     @agenda = Agenda.new(agenda_params)
-    if @agenda.save!
+    if @agenda.save
       if current_user.is_a?(User::Admin)
         redirect_to users_admins_meetings_url
       else

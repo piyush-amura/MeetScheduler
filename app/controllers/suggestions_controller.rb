@@ -15,7 +15,7 @@ class SuggestionsController < ApplicationController
     a_id = params[:suggestion][:agenda_id]
     @suggestion = Suggestion.new(suggestion_params)
     @suggestion.user = current_user
-    if @suggestion.save!
+    if @suggestion.save
       redirect_to suggestions_path(agenda_id: a_id)
     else
       render 'new'
@@ -36,7 +36,7 @@ class SuggestionsController < ApplicationController
   def destroy
     if Suggestion.find(params[:id]).destroy
       redirect_to suggestions_path(agenda_id: params[:agenda_id])
-    end   
+    end
   end
 
   def index

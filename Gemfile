@@ -41,6 +41,10 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'shoulda'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
