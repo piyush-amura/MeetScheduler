@@ -4,7 +4,7 @@
 # @author Piyush Wani <piyush.wani@amuratech.com>
 #
 class AgendasController < ApplicationController
-  before_action only: %i[edit update] do
+  before_action only: %i[edit update show] do
     @agenda = Agenda.where(id: params[:id]).first
   end
     
@@ -48,7 +48,18 @@ class AgendasController < ApplicationController
     else
       @agendas = Agenda.where(mom_id: params[:mom_id])
     end
+    respond_to do |format|
+      format.json {render json: @agendas}
+      format.html {render 'index'}
+    end
   end
+
+  def show
+    p @agenda
+    respond_to do |format|
+      format.json {render json: @agenda}
+    end
+  end  
 
   def agenda_params
     params.require(:agenda).permit(:name, :mom_id, :status, :allocated_time, :action)

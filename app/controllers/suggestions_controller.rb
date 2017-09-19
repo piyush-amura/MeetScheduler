@@ -45,11 +45,21 @@ class SuggestionsController < ApplicationController
     else
       @suggestions = Suggestion.where(agenda_id: params[:agenda_id])
     end
+
+    respond_to do |format|
+      format.json {render json: @suggestions}
+      format.html {render 'index'}
+    end
   end
 
   def suggestion_params
     params.require(:suggestion).permit(:suggestion, :agenda_id)
   end
 
-  def show; end
+  def show
+    @suggestion = Suggestion.where(id: params[:id]).first
+    respond_to do |format|
+      format.json { render json: @suggestion }
+    end
+  end
 end

@@ -47,6 +47,7 @@ group :development, :test do
   gem 'simplecov', :require => false, :group => :test
   gem 'mongoid-rspec'
   gem 'newrelic-moped', '~> 0.0.5'
+  # gem 'jquery-rails'
 end
 
 group :development do

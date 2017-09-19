@@ -3,7 +3,7 @@
 # @author Piyush Wani <piyush.wani@amuratech.com>
 #
 class VenuesController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action only: %i[edit update] do
     @venue = Venue.where(id: params[:id]).first
   end
@@ -20,6 +20,10 @@ class VenuesController < ApplicationController
   #
   def index
     @venues = Venue.all
+    respond_to do |format|
+      format.json {render json: @venues}
+      format.html {render 'index'}
+    end
   end
 
   # method that creates the venue object and add its to Venue model
@@ -55,6 +59,19 @@ class VenuesController < ApplicationController
   #
   def destroy
     redirect_to(venues_path) if Venue.find(params[:id]).destroy
+  end
+
+  # show method return object of venue
+  #
+  #
+  # @return [Venue] venue object
+  #
+  def show
+    @venue = Venue.where(id: params[:id]).first
+    respond_to do |format|
+      format.json { render json: @venue }
+      format.html
+    end
   end
 
   private
