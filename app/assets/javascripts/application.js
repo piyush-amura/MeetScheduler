@@ -18,6 +18,11 @@
 //= require backbone
 //= require backbone.marionette
 //= require main
+//= require_directory ./backbone_defaults/models
+//= require_directory ./backbone_defaults/collections
+//= require_directory ./backbone_defaults/views
+//= require_directory ./backbone_defaults/controllers
+//= require_directory ./backbone_defaults/routes
 //= require_tree .
 
 
