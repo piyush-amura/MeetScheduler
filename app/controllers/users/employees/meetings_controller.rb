@@ -4,6 +4,7 @@
 #
 class Users::Employees::MeetingsController < ApplicationController
   before_action :authenticate_user!
+  
   before_action only: %i[new edit] do
     @venues = Venue.all.pluck(:name, :id).to_h
     @status_list = %w[on\ time delayed canceled]
@@ -70,7 +71,7 @@ class Users::Employees::MeetingsController < ApplicationController
       params[:selected].to_h.each do |k, v|
         s.push(k) if v == '1'
       end
-      s.each { |id| meet.members.destroy(User.find(id)) }
+      s.each { |id| meet.members.delete(User.find(id)) }
       redirect_to(users_employees_meetings_url)
     else
       @users = User.all
