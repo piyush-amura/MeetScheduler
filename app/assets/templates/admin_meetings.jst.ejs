@@ -1,0 +1,33 @@
+<h1>Listing Meetings</h1>
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Key Note</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>Duration(In min)</th>
+      <th>Venue</th>
+      <th>Organiser</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Add agenda</th>
+      <th>List agendas</th>
+      <th>Add Members</th>
+      <th>Remove Members</th>
+    </tr>
+
+  <% _.each(admin_meetings, function(meeting){ %>
+    <tr>
+      <td><%= meeting.id %></td>
+      <td><%= meeting.key_note %></td>
+      <td><%= meeting.status %></td>
+      <td><%= meeting.date %></td>
+      <td><%= meeting.start_time %></td>
+      <td><%= meeting.duration%></td>
+    </tr>
+  <% }) %>
+  </table>
+</div>
+<br>

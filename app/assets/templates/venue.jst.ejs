@@ -1,0 +1,23 @@
+<h1>Listing Venues</h1>
+<div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Capacity</th>
+			<th>Status</th>
+			<th>Edit</th>
+    		<th>Remove</th>
+		</tr>
+		<% _.each(venues, function(venue){ %>
+			<tr>
+				<td><%= venue.name %></td>
+				<td><%= venue.address %></td>
+				<td><%= venue.capacity %></td>
+				<td><%= venue.status %></td>
+				<td id="edit", venue_id='<%= venue._id %>' >edit</td>
+				<td id="delete", venue_id='<%= venue._id %>'>delete</td>
+			</tr>
+		<% }) %>
+	</table>
+</div>

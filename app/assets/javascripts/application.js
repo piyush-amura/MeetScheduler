@@ -13,8 +13,9 @@
 //= require jquery-3.2.1
 //= require rails-ujs
 //= require turbolinks
-//= require bootstrap.min
-//= require underscore-min
+//= require bootstrap
+//= require underscore
+//= require underscore.string
 //= require backbone
 //= require backbone.marionette
 //= require main
@@ -23,6 +24,8 @@
 //= require_directory ./backbone_defaults/views
 //= require_directory ./backbone_defaults/controllers
 //= require_directory ./backbone_defaults/routes
+//= require_directory ../templates
 //= require_tree .
+
 
 
