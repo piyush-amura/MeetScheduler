@@ -1,4 +1,4 @@
-var VenueIndexLayout= Marionette.LayoutView.extend({
+VenueIndexLayout = Marionette.LayoutView.extend({
 	
   template: JST['default'],	
   
@@ -9,7 +9,7 @@ var VenueIndexLayout= Marionette.LayoutView.extend({
 
   onRender: function() {
   	this.showChildView('head',new NavBarView() );
-    this.showChildView('list',new VenueIndexView( {model: this.model} ) );
+    this.showChildView('list',
+    	new VenuesCollectionView( { collection: this.collection } ) );
   }
-
 });

@@ -58,7 +58,13 @@ class VenuesController < ApplicationController
   #
   #
   def destroy
-    redirect_to(venues_path) if Venue.find(params[:id]).destroy
+    # redirect_to(venues_path) if Venue.find(params[:id]).destroy
+    Venue.find(params[:id]).destroy
+    respond_to do |format|
+      format.json { render json: Venue.all }
+      format.html { render 'index' }
+    end
+    # render 'index'
   end
 
   # show method return object of venue
@@ -70,6 +76,7 @@ class VenuesController < ApplicationController
     @venue = Venue.where(id: params[:id]).first
     respond_to do |format|
       format.json { render json: @venue }
+      # format.text { render 'index' }
       format.html
     end
   end
