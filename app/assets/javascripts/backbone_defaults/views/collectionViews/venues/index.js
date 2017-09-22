@@ -1,5 +1,6 @@
 VenuesCollectionView = Marionette.CollectionView.extend({
-	tagName: 'table',
-	className: 'table-responsive',
-	childView: VenueItemView
+	childView: function(){
+		console.log('in CollectionView');
+		return VenueItemView;
+	}
 });

@@ -23,6 +23,7 @@
 //= require_tree ./backbone_defaults/views/layoutViews
 //= require_tree ./backbone_defaults/views/itemViews
 //= require_tree ./backbone_defaults/views/collectionViews
+//= require_tree ./backbone_defaults/views/compositeViews
 //= require_tree ./backbone_defaults/models
 //= require_tree ./backbone_defaults/collections
 //= require_tree ./backbone_defaults/controllers

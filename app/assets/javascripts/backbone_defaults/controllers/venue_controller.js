@@ -2,8 +2,8 @@ var VenueController = Marionette.Controller.extend({
   index: function() {
     var venues = new App.Collections.Venues();
     venues.fetch().done(function() {
-      var venue_view = new VenueIndexLayout({collection: venues});
-      $('body').html(venue_view.render().$el);      
+      var venue_view = new VenuesIndexLayout({collection: venues});
+      $('body').html(venue_view.render().$el);
     });
   },
 
