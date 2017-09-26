@@ -20,13 +20,13 @@
 //= require backbone.marionette
 //= require main
 //= require_tree ../templates
-//= require_tree ./backbone_defaults/views/layoutViews
-//= require_tree ./backbone_defaults/views/itemViews
-//= require_tree ./backbone_defaults/views/collectionViews
-//= require_tree ./backbone_defaults/views/compositeViews
+//= require_tree ./meetscheduler/views/layoutViews
+//= require_tree ./meetscheduler/views/itemViews
+//= require_tree ./meetscheduler/views/collectionViews
+//= require_tree ./meetscheduler/views/compositeViews
 //= require_tree ./backbone_defaults/models
 //= require_tree ./backbone_defaults/collections
-//= require_tree ./backbone_defaults/controllers
-//= require_tree ./backbone_defaults/routes
+//= require_tree ./meetscheduler/controllers
+//= require_tree ./meetscheduler/routes
 
 //= require_tree .
