@@ -10,13 +10,12 @@ VenueItemView = Marionette.ItemView.extend({
   },
 
   edit_venue: function(event) {
-  	// debugger;
   	var id = $(event.currentTarget).data('id');
     Backbone.history.navigate('venues/' + id + '/edit', {trigger: true} );
   	},
 
   delete_venue: function(event){
-  	var id = $(event.currentTarget).data('id');
+ 	this.model.destroy();
   },
 
   serializeData: function() {

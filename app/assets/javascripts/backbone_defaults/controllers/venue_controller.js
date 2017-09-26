@@ -17,7 +17,6 @@ var VenueController = Marionette.Controller.extend({
   
   edit: function(){
   	console.log('venue#edit');
-    $('body').html('<h1>hello edit</h1>')
   }
 
 });
