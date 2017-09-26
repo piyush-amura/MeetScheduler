@@ -36,8 +36,17 @@ class Users::Employees::MeetingsController < ApplicationController
   def index
     @past_meetings = current_user.past_meetings
     @upcoming_meetings = current_user.upcoming_meetings
-    @organised_meetings = current_user.organised_meetings 
-    p @user_id
+    @organised_meetings = current_user.organised_meetings
+    @meetings = {
+      organised_meetings: @organised_meetings,
+      upcoming_meetings: @upcoming_meetings,
+      past_meetings: @past_meetings
+    }
+
+    respond_to do |format|
+      format.json { render json: @meetings }
+      format.html { render 'index' }
+    end
   end
 
   def destroy
@@ -78,7 +87,15 @@ class Users::Employees::MeetingsController < ApplicationController
       @meeting_id = params[:id]
       meet = Meeting.find(@meeting_id)
       @included_members = meet.members
-    end  
+    end
+  end
+
+  def show
+    @meeting = Meeting.where(id: params[:id]).first
+    respond_to do |format|
+      format.json { render json: @meeting }
+      format.html
+    end
   end
 
   private

@@ -35,11 +35,22 @@ class Users::Admins::MeetingsController < ApplicationController
 
   def index
     @meetings = Meeting.all
-    p @user_id
+    respond_to do |format|
+      format.json {render json: @meetings}
+      format.html {render 'index'}
+    end
   end
 
   def destroy
     redirect_to(users_admins_meetings_url) if Meeting.find(params[:id]).destroy
+  end
+
+  def show
+    @meeting = Meeting.where(id: params[:id]).first
+    respond_to do |format|
+      format.json { render json: @meeting }
+      format.html
+    end
   end
 
   def add_members
