@@ -1,7 +1,7 @@
 VenuesIndexLayout = Marionette.LayoutView.extend({
-	
-  template: JST['default'],	
-  
+
+  template: JST['default'],
+
   regions: {
   	head: '.head',
     list: '.list'

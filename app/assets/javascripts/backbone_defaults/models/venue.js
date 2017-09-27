@@ -1,4 +1,4 @@
-App.Models.Venue = Backbone.Model.extend({	
+App.Models.Venue = Backbone.Model.extend({
 	urlRoot: '/venues',
-}) 
+})
 
