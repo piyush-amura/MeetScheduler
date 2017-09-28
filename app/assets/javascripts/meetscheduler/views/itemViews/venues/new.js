@@ -13,8 +13,8 @@ VenueNewItemView = Marionette.ItemView.extend({
             address: $('#address').val(),
              status: $('#status').val()
     });
-    venue.save()
-    Backbone.history.navigate('venues', {trigger: true} );
+    venue.save();
+    Backbone.history.navigate('venues', {trigger: true, replace: true } );
   }
 
 });

@@ -21,8 +21,8 @@ class VenuesController < ApplicationController
   def index
     @venues = Venue.all
     respond_to do |format|
-      format.json {render json: @venues}
-      format.html {render 'index'}
+      format.json { render json: @venues }
+      format.html { render 'index' }
     end
   end
 
@@ -33,8 +33,16 @@ class VenuesController < ApplicationController
   #
   def create
     @venue = Venue.new(venue_params)
-    redirect_to(venues_path) && return if @venue.save
-    render 'new'
+    # redirect_to(venues_path) && return if @venue.save
+    # render 'new'
+    if @venue.save
+      respond_to do |format|
+        format.json { render json: Venue.all }
+        format.html { redirect_to(venues_path) }
+      end
+    else
+      render 'new'
+    end
   end
 
   # method that provide edit view and venue object up for updatation
@@ -50,8 +58,14 @@ class VenuesController < ApplicationController
   # @return response body html or any other formats (json, xml)
   #
   def update
-    redirect_to(venues_path) && return if @venue.update(venue_params)
-    render 'edit'
+    if @venue.update(venue_params)
+      respond_to do |format|
+        format.json { render json: Venue.all }
+        format.html { redirect_to(venues_path) }
+      end
+    else
+      render 'edit'
+    end
   end
 
   # method that destroys venue object
@@ -76,8 +90,20 @@ class VenuesController < ApplicationController
     @venue = Venue.where(id: params[:id]).first
     respond_to do |format|
       format.json { render json: @venue }
-      # format.text { render 'index' }
       format.html
+    end
+  end
+
+  # <method for searching>
+  #
+  #
+  # @return [<Array>] <Array of Venue Objects that are matching with keywords>
+  #
+  def search
+    param = params[:name]
+    @venues = Venue.where( { name: /^#{param}/ } )
+    respond_to do |format|
+      format.json { render json: @venues }
     end
   end
 

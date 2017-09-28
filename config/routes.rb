@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     root to: 'devise/sessions#new'
   end
 
-  resources :venues, :agendas, :suggestions
+  resources :venues do
+    post 'search', on: :collection
+  end
+
+  resources :agendas, :suggestions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
