@@ -1,0 +1,5 @@
+<%= render partial: 'shared/navbar' %>
+<h1>----------- Update Venue ------------ </h1>
+<%= form_for @venue, url: venue_path, method: 'patch' do |f| %>
+<%= render partial: 'venues/forms', locals: {f: f} %>  
+<% end %>

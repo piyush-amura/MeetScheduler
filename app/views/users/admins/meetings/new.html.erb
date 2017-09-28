@@ -1,0 +1,7 @@
+<%= render partial: 'shared/navbar' %>
+<h2>New Meeting</h2>
+<div class='form' />
+  <%= form_for :meeting, url: users_admins_meetings_url do |f| %>
+  <%= render partial: 'users/shared/forms', locals: {f: f} %>
+  <% end %>
+</div>

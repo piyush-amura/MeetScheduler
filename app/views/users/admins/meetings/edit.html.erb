@@ -1,0 +1,5 @@
+<%= render partial: 'shared/navbar' %>
+<h1>Users::Admins::Meetings#edit</h1>
+<%= form_for @meeting, method: 'patch', url: users_admins_meeting_path do |f| %>
+<%= render partial: 'users/shared/forms', locals: {f: f} %>
+<% end %>

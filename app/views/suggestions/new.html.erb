@@ -1,0 +1,6 @@
+<%= render partial: 'shared/navbar' %>
+<h1>New Suggestion</h1>	
+<%= form_for :suggestion, url: suggestions_path do |f| %>
+<%= hidden_field_tag "suggestion[agenda_id]", "#{@agenda_id}" %>
+<%= render partial: 'suggestions/forms', locals: {f: f} %>
+<% end %>
